@@ -28,6 +28,9 @@ def upload_image():
             return redirect(request.url)
     if file and allowed_file(file.filename):
         res = get_prediction(filedata, project_id, model_id)
+        if len(res.payload) < 1: 
+            response = {"keyword":""}
+            return jsonify(response) 
         if res.payload[0].classification.score > 0.5:
             response = {"keyword":res.payload[0].display_name}
             return jsonify(response)
