@@ -29,11 +29,11 @@ def upload_image():
     if file and allowed_file(file.filename):
         res = get_prediction(filedata, project_id, model_id)
         if len(res.payload) < 1: 
-            response = {"keyword":""}
+            response = ""
             return jsonify(response) 
         if res.payload[0].classification.score > 0.5:
-            response = {"keyword":res.payload[0].display_name}
-            return jsonify(response)
+            response = res.payload[0].display_name
+            return response
 
     else:
         return "file format has to be jpg"
