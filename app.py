@@ -29,8 +29,8 @@ def upload_image():
     if file and allowed_file(file.filename):
         res = get_prediction(filedata, project_id, model_id)
         if len(res.payload) < 1: 
-            response = ""
-            return jsonify(response) 
+            response = "null"
+            return response
         if res.payload[0].classification.score > 0.5:
             response = res.payload[0].display_name
             return response
